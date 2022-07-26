@@ -1,4 +1,4 @@
-import { IPost } from "../components/models";
+import { IPost } from "../models";
 
 export const POSTS: IPost[] = [
   {

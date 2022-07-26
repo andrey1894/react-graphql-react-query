@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { IPost } from "../components/models";
+import { IPost } from "../models";
 
 export class PostService {
   static async getPosts(limit = 10, page = 1): Promise<AxiosResponse<IPost[]>> {

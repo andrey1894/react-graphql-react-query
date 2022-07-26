@@ -1,11 +1,13 @@
-import { IPost } from "../../models";
+import { ILesson } from "../../models";
 
-const PostItem = ({ post, onRemove }: { post: IPost, onRemove: Function }) => {
+const LessonItem = ({ lesson, onRemove }: { lesson: ILesson, onRemove: Function }) => {
   return (
     <div className="card">
-      <div className="card-header">{post.title}</div>
+      <div className="card-header">{lesson.name}</div>
       <div className="card-body">
-        <p className="card-text">{post.body}</p>
+        <p className="card-text">Start date: {lesson.startDate}</p>
+        <p className="card-text">End date: {lesson.endDate}</p>
+        <p className="card-text">Students: {lesson.students.length}</p>
         <div className="container">
           <div className="d-flex justify-content-between">
             <div className="">
@@ -23,4 +25,4 @@ const PostItem = ({ post, onRemove }: { post: IPost, onRemove: Function }) => {
   );
 };
 
-export default PostItem;
+export default LessonItem;

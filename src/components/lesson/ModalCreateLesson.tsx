@@ -1,38 +1,33 @@
-import React, { MouseEventHandler, useState } from "react";
+import React, { useState } from "react";
 
 import MyInput from "../UI/MyInput";
-import { IPost } from "../../models";
+import { ILesson } from "../../models";
 
-const ModalCreatePost = ({
+const ModalCreateLesson = ({
   visible,
   setVisible,
-  onCreatePost,
+  onCreateLesson,
 }: {
   visible: boolean;
   setVisible: Function;
-  onCreatePost: Function;
+  onCreateLesson: Function;
 }) => {
   const rootClasses = ["modal", "fade"];
   if (visible) {
     rootClasses.push("show");
   }
 
-  const [post, setPost] = useState<IPost>({} as IPost);
+  const [lesson, setLesson] = useState<ILesson>({} as ILesson);
 
-  const addNewPost = (e?: React.FormEvent) => {
+  const addNewLesson = (e?: React.FormEvent) => {
     e?.preventDefault();
-    if (!post.title || !post.body) {
+    if (!lesson.name || !lesson.startDate || !lesson.endDate) {
       return;
     }
 
-    const newPost = {
-      ...post,
-      id: new Date().getTime(),
-    };
+    setLesson({} as ILesson);
 
-    setPost({} as IPost);
-
-    onCreatePost(newPost);
+    onCreateLesson({...lesson, startDate: new Date(lesson.startDate).toISOString(), endDate: new Date(lesson.endDate).toISOString()});
     setVisible(false);
   };
 
@@ -55,26 +50,37 @@ const ModalCreatePost = ({
             ></button>
           </div>
           <div className="modal-body">
-            <form action="" onSubmit={addNewPost}>
+            <form action="" onSubmit={addNewLesson}>
               <div className="mb-2">
                 <MyInput
-                  value={post.title || ""}
+                  value={lesson.name || ""}
                   onChange={(e: any) =>
-                    setPost({ ...post, title: e.target.value })
+                    setLesson({ ...lesson, name: e.target.value })
                   }
                   type="text"
-                  placeholder="Title"
+                  placeholder="Lesson name"
                 />
               </div>
 
               <div className="mb-2">
                 <MyInput
-                  value={post.body || ""}
+                  value={lesson.startDate || ""}
                   onChange={(e: any) =>
-                    setPost({ ...post, body: e.target.value })
+                    setLesson({ ...lesson, startDate: e.target.value })
                   }
-                  type="text"
-                  placeholder="Body"
+                  type="datetime-local"
+                  placeholder="StartDate"
+                />
+              </div>
+
+              <div className="mb-2">
+                <MyInput
+                  type="datetime-local"
+                  value={lesson.endDate || ""}
+                  onChange={(e: any) =>
+                    setLesson({ ...lesson, endDate: e.target.value })
+                  }
+                  placeholder="EndDate"
                 />
               </div>
             </form>
@@ -92,10 +98,10 @@ const ModalCreatePost = ({
               type="button"
               className="btn btn-primary"
               onClick={() => {
-                addNewPost();
+                addNewLesson();
               }}
             >
-              Add post
+              Add lesson
             </button>
           </div>
         </div>
@@ -104,4 +110,4 @@ const ModalCreatePost = ({
   );
 };
 
-export default ModalCreatePost;
+export default ModalCreateLesson;

@@ -4,7 +4,7 @@ import PageLayout from "../components/layout/PageLayout";
 import ModalCreatePost from "../components/post/ModalCreatePost";
 import PostList from "../components/post/PostList";
 import Counter from "../components/Counter";
-import { IPost } from "../components/models";
+import { IPost } from "../models";
 import SearchPost from "../components/post/SearchPost";
 import { useFetching, useFilteredPosts } from "../hooks";
 import { PostService } from "../api";

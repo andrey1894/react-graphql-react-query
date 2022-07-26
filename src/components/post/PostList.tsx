@@ -1,5 +1,5 @@
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import { IPost } from "../models";
+import { IPost } from "../../models";
 import PostItem from "./PostItem";
 
 const PostList = ({
